@@ -1,0 +1,11 @@
+name = Flipping Circle Slider
+description = Provides a views plugin which displays a flipping circle slider
+core = 7.x
+package = Custom
+dependencies[] = views
+
+files[] = flipping_circle_slider.info
+files[] = flipping_circle_slider.module
+files[] = flipping_circle_slider.views.inc
+files[] = flipping_circle_slider_plugin_style.inc
+files[] = views_view_flipping_circle_slider.tpl.php

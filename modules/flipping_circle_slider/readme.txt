@@ -1,0 +1,1 @@
+Flipping Circle slider is my first Drupal module, developed to use as a reusable slider based on the slider http://tympanus.net/codrops/2013/01/28/flipping-circle-slideshow/. The module creates a view style which can be selected when the user creates the a view. Which provides a seamless way to re use the slider for multiple views displays.

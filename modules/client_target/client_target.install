@@ -1,0 +1,8 @@
+<?php
+/**
+ * Implements hook_uninstall().
+ */
+function client_target_uninstall() {
+  variable_del('targeted_content_types');
+  variable_del('targeted_field_name');
+}

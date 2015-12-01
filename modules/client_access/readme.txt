@@ -1,0 +1,1 @@
+The client access module creates page manager access rule. The access rule control the ability to determine if the user has access to the page manager page or not based on the users Country and Language. For instance users from country A may not have access to country B page and language.

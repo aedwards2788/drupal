@@ -1,0 +1,63 @@
+/* General Demo Style */
+@import url(http://fonts.googleapis.com/css?family=Lato:400,700);
+
+/* Clearfix hack by Nicolas Gallagher: http://nicolasgallagher.com/micro-clearfix-hack/ */
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+.clearfix {
+    *zoom: 1;
+}
+
+.container {
+	width: 100%;
+	position: relative;
+}
+
+.main,
+.container > header {
+	width: 90%;
+	max-width: 1240px;
+	margin: 0 auto;
+	position: relative;
+	padding: 10px 30px 50px 30px;
+	overflow: hidden;
+}
+
+.container > header {
+	padding: 30px;
+}
+
+.container > header h1 {
+	font-size: 34px;
+	line-height: 38px;
+	margin: 0;
+	float: left;
+	text-shadow: 0 -1px 0 rgba(0,0,0,0.3);
+}
+
+.container > header h1 span {
+	display: block;
+	font-size: 20px;
+	font-weight: 400;
+}
+
+.support-note {
+	clear: both;
+}
+
+.support-note span{
+	color: #ac375d;
+	font-size: 16px;
+	display: none;
+	font-weight: bold;
+	text-align: center;
+	padding: 5px 0;
+}

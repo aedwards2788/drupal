@@ -1,0 +1,4 @@
+name = Client Country Access
+description = Sets access rules for page manager pages based on the Country and Language.
+package = Client
+core = 7.x

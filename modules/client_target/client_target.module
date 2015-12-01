@@ -1,0 +1,94 @@
+<?php
+/*Load utility functions*/
+require_once('includes/client_target.inc');
+
+/**
+ * Implements hook_menu().
+ */
+function client_target_menu() {
+  $items['admin/config/user-interface/client-target'] = array(
+    'title' => 'Client Targeting Rules',
+    'description' => t('Select values which will be used for targeting data'),
+    'paclient callback' => 'drupal_get_form',
+    'paclient arguments' => array('client_target_form'),
+    'access arguments' => array('administer nodes'),
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_form().
+ */
+function client_target_form($node, &$form_state) {
+  $content_types = node_type_get_names();
+  $fields = field_info_fields();
+  $views = views_get_all_views();
+
+  //Store view names in temporary variable
+  foreach ($views as $key => $value) {
+    if($value->disabled!=TRUE){
+      $view_names[$value->name] = $value->human_name;
+    }
+  }
+  //Store field names in a temporary variable
+  foreach ($fields as $key => $value) {
+    $field_names[$value['field_name']] = $value['field_name'];
+  }
+
+  //Sort
+  asort($view_names);
+  asort($field_names);
+  asort($content_types);
+
+  $form['from'] = array(
+    '#type'=> 'item',
+    '#title'=> '',
+    '#markup'=> t('Select the targeting roles in which will apply to nodes'),
+  );
+  $form['targeted_content_types'] = array(
+    '#type' => 'select',
+    '#options' => $content_types,
+    '#multiple' => TRUE,
+    '#title' => t('targeted Content Types'),
+    '#default_value' => variable_get('targeted_content_types'),
+  );
+  $form['targeted_field_names'] = array(
+    '#type' => 'select',
+    '#options' => $field_names,
+    '#multiple' => TRUE,
+    '#title' => t('targeted Fields'),
+    '#default_value' => variable_get('targeted_field_names'),
+  );
+  //Only show form element if
+  if(module_exists('views')){
+    $form['targeted_view_names'] = array(
+      '#type' => 'select',
+      '#options' => $view_names,
+      '#multiple' => TRUE,
+      '#title' => t('targeted Views'),
+      '#default_value' => variable_get('targeted_view_names'),
+    );
+  }
+  return system_settings_form($form);
+}
+
+/**
+ * Implements hook_node_access().
+ */
+function client_target_node_access($node, $op, $account) {
+  $account = user_load($account->uid);
+  $is_targeted = ($node->field_targeted[language_NONE][0]['value']!=0) ? 1 : 0;
+  if($is_targeted && $op!='create' && !_client_target($account, $node)) {
+    return NODE_ACCESS_DENY;
+  }
+}
+
+
+function client_target_views_api() {
+  return array(
+    'api' => 3,
+    'path' => drupal_get_path('module', 'client_target') . '/includes/views/',
+  );
+}

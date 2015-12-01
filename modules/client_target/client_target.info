@@ -1,0 +1,5 @@
+name = Client targeting
+description = Applies targeting on content type nodes which contain BFL Term Relation fields.
+package = Client
+core = 7.x
+files[] = includes/client_target.inc

@@ -1,0 +1,32 @@
+<?php
+/**
+* Implement hook views api
+*
+* Register views api information.
+*/
+function flipping_circle_slider_views_api(){
+	return array(
+		'api' => 3,
+	);
+}
+
+/**
+* Implement hook init
+*
+* Load necessary CSS stylesheets and Jquery Libraries.
+*/
+function flipping_circle_slider_init(){
+	drupal_add_css(drupal_get_path('module','flipping_circle_slider').'/css/default.css');
+	drupal_add_css(drupal_get_path('module', 'flipping_circle_slider').'/css/component.css');
+	drupal_add_js(drupal_get_path('module', 'flipping_circle_slider').'/js/modernizr.custom.js');
+	drupal_add_js(drupal_get_path('module', 'flipping_circle_slider').'/js/jquery.flipshow.js');
+	drupal_add_js('jQuery( function() {jQuery( "#fc-slideshow" ).flipshow();} );', 'inline');
+}
+
+/**
+* Implement preprocess function, in this
+*/
+function template_preprocess_views_view_flipping_circle_slider(&$vars){
+	//Retrieve data gathered from the user from Views Style Settings Interface.
+	$width = $vars['options']['width'];
+}
